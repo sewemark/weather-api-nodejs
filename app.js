@@ -22,3 +22,5 @@ app.get('/weather',function (req,res) {
 });
 
 app.listen(appConfig.PORT);
+
+module.exports = app;
