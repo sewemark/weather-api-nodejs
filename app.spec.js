@@ -2,7 +2,7 @@
  * Created by sew on 2017-08-19.
  */
 var chai = require('chai');
-var chaiHttp = require('chai-http');
+    var chaiHttp = require('chai-http');
 var server = require('./app');
 var should = chai.should();
 

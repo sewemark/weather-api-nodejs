@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "chai": "3.5.0",
+    "chai-http": "^3.0.0",
     "co-mocha": "1.1.2",
     "mocha": "2.5.3",
     "sinon": "1.17.4",
