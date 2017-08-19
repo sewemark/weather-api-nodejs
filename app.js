@@ -1,22 +1,14 @@
 const express = require('express');
 const request = require('request');
-
+const validators = require('./validators');
 var app = express();
 
 const PORT =3000;
 const APP_KEY = '5c981cf4fd4cefdf6a38cf7118441aaa';
 
-function validateCity(city) {
-   return typeof city != 'undefined' && city.trim().toLowerCase()==="londyn" || city.trim().replace(/ /g,'').toLowerCase() ==='newyork';
-}
-
-function validateEmail(email) {
-    var reqex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return  typeof email != 'undefined' && reqex.test(email);
-}
 
 function paramsValidator(params) {
-    return validateCity(params.city) && validateEmail(params.email);
+    return validators.validateCity(params.city) && validators.validateEmail(params.email);
 }
 
 function parseResponse(body) {
@@ -50,7 +42,6 @@ function paraseParams(params) {
 }
 
 app.get('/weather',function (req,res) {
-
       if(paramsValidator(req.query)){
           var params = paraseParams(req.query);
           request(constructUrlForCity(params.city),{json:true},function(err,apiResponse){
