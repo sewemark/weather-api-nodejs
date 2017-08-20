@@ -1,18 +1,18 @@
 const express = require('express');
 const request = require('request');
-const apiHandler  = require('./apiHandler');
+const getWeatherEndpointHandler  = require('./apiHandler');
 const appConfig = require('./config');
 
 var app = express();
 
 app.get('/weather',function (req,res) {
-      if(apiHandler.validateParams(req.query)){
-          var params = apiHandler.paraseParams(req.query);
-          request(apiHandler.constructUrlForCity(params.city),{json:true},function(err,apiResponse){
+      if(getWeatherEndpointHandler.validateParams(req.query)){
+          var params = getWeatherEndpointHandler.paraseParams(req.query);
+          request(getWeatherEndpointHandler.constructUrlForCity(params.city),{json:true},function(err,apiResponse){
               if(err){
                    res.status(400).send('Can not get weather for this location');
               }else{
-                  var parsedReponse = apiHandler.parseResponse(apiResponse.body);
+                  var parsedReponse = getWeatherEndpointHandler.parseResponse(apiResponse.body);
                   res.status(200).send(parsedReponse);
               }
           })
